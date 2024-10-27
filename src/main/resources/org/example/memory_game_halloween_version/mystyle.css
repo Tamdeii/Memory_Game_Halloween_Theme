@@ -1,0 +1,48 @@
+.label-custom {
+    -fx-font-size: 28px; /* Kích thước chữ */
+    -fx-font-weight: bolder; /* Đậm chữ */
+    -fx-text-fill:linear-gradient(to right, #dc5d05,#efbf3e); /* Màu chữ */
+    -fx-background-radius: 15; /* Bo tròn nền */
+    -fx-border-color: #dc5d05; /* Màu viền */
+    -fx-border-width: 2; /* Độ dày viền */
+    -fx-padding: 10; /* Khoảng cách bên trong */
+    -fx-effect: dropshadow(gaussian, rgba(255, 165, 0, 0.7), 10, 0, 0, 1);
+}
+
+
+.hbox-Points {
+    -fx-alignment: CENTER; /* Center align the components inside HBox */
+    -fx-spacing: 5; /* Spacing between components */
+    -fx-padding: 5; /* Padding around HBox */
+    -fx-background-color: linear-gradient(to right, #dc5d05, #efbf3e); /* Gradient background */
+    -fx-background-radius: 10; /* Rounded background */
+    -fx-effect: dropshadow(gaussian, rgba(255, 128, 38, 0.8), 10, 0.5, 0, 0); /* Glow effect */
+}
+
+.label-Points {
+    -fx-text-fill: white; /* Set text color to white */
+    -fx-font-size: 17px; /* Increase font size */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-font-family: "Roboto Light";
+}
+
+.button-restart {
+    -fx-background-color: #f36200; /* Màu nền cam */
+    -fx-text-fill: #ffffff; /* Màu chữ trắng */
+    -fx-font-weight: bold; /* Đậm chữ */
+    -fx-border-color:  #a0522d; /* Màu viền đen */
+    -fx-border-width: 2px; /* Độ dày viền */
+    -fx-border-radius: 7px; /* Bo tròn viền */
+    -fx-padding: 5; /* Khoảng cách bên trong */
+    -fx-font-size: 18px; /* Kích thước chữ */
+    -fx-opacity: 0.9; /* Độ trong suốt */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ */
+}
+
+.button-restart:hover {
+    -fx-background-color: #ffffff; /* Màu nền khi hover */
+    -fx-text-fill: #ff7518; /* Màu chữ khi hover */
+    -fx-border-color: #ff7518; /* Màu viền khi hover */
+    -fx-opacity: 1; /* Độ trong suốt khi hover */
+    -fx-border-radius: 7px;
+}
