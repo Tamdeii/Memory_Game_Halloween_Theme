@@ -15,16 +15,8 @@ public class HelloController {
 
     @FXML
     private Label pointsLabel, POINT;
-
     @FXML
     private GridPane gameMatrix;
-    @FXML
-    private Button restartButton;
-    @FXML
-    private ImageView image1, image2, image3, image4,
-                      image5, image6, image7, image8,
-                      image9, image10, image11, image12,
-                      image13, image14, image15, image16;
 
     private int Points = 0;
     private ArrayList<Button> buttons = new ArrayList<>();
@@ -37,26 +29,6 @@ public class HelloController {
         setupGameGrid();
         setupCards();
     }
-
-//    private  void ini_card(){
-//        cardValues.clear();
-//        image1.setImage(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
-//        image2.setImage(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
-//        image3.setImage(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
-//        image4.setImage(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
-//        image5.setImage(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
-//        image6.setImage(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
-//        image7.setImage(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
-//        image8.setImage(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
-//        image9.setImage(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
-//        image10.setImage(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
-//        image11.setImage(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
-//        image12.setImage(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
-//        image13.setImage(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
-//        image14.setImage(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
-//        image15.setImage(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
-//        image16.setImage(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
-//    }
 
     private void setupGameGrid() {
         for (int i = 0; i < 4; i++) {
