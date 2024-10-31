@@ -24,6 +24,9 @@ public class HelloApplication extends Application {
             //toExternalForm(): convert the link into string can used
             scene.getStylesheets().add(getClass().getResource("mystyle.css").toExternalForm());
             stage.setResizable(false);
+//            FXMLLoader fxmlLoader_homePage = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
+//            Scene scene = new Scene(fxmlLoader_homePage.load(), 500, 690);
+//            stage.setResizable(false);
 
             String musicFile = "/mp3/Halloween_Orchestra_Halloween_Night.mp3";
             Media media = new Media(getClass().getResource(musicFile).toURI().toString());
