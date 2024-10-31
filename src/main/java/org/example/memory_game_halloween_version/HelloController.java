@@ -15,12 +15,10 @@ import java.util.Collections;
 //import.java.scene.*
 
 public class HelloController {
-
     @FXML
     private Label pointsLabel, POINT;
     @FXML
     private GridPane gameMatrix;
-
     private int Points = 0;
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Image> cardValues = new ArrayList<>();
@@ -81,15 +79,16 @@ public class HelloController {
             return;
         }
 
+        // === SET IMAGE AND INDEX ===
         int index = buttons.indexOf(clickedCard);
         ImageView imageView = new ImageView(cardValues.get(index));
 
         Image frontImage = cardValues.get(index);
-        flipCard(clickedCard, frontImage);
+        flipCard(clickedCard, frontImage);  //Flip card animation
 
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
-//        //Set Image
+
         clickedCard.setGraphic(imageView);
 
         // Check if this is the first or second card clicked
@@ -190,32 +189,31 @@ public class HelloController {
 
     @FXML
     private void restartButton() {
-        // Nếu có animation đang chạy, không cho phép nhấn nút restart
+        //Prevent until Animation done
         if (isAnimating_During_restart) {
-            return; // Không làm gì nếu đang hoạt động
+            return; // Return nothing
         }
 
-        // Đặt lại điểm số
+        // Restart Point
         Points = 0;
         pointsLabel.setText(String.valueOf(Points));
 
-        // Thiết lập lại trạng thái của các thẻ
+        // Set up card back to restart
         for (Button button : buttons) {
-            if (button != null) { // Kiểm tra null
+            if (button != null) {
                 ImageView backImageView_Restart = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
                 backImageView_Restart.setFitWidth(100);
                 backImageView_Restart.setFitHeight(100);
-                button.setGraphic(backImageView_Restart); // Đặt lại hình ảnh thẻ
+                button.setGraphic(backImageView_Restart);
             }
         }
 
-        // Thiết lập lại các thẻ và trộn lại giá trị
-        setupCards(); // Thiết lập lại các giá trị của thẻ
+        setupCards();
 
-        // Bắt đầu animation cho tất cả các thẻ (nếu cần)
-        isAnimating_During_restart = true; // Đánh dấu là đang trong quá trình khởi động lại
+        // Start the animation before restart the game
+        isAnimating_During_restart = true;
         for (Button button : buttons) {
-            if (button != null) { // Kiểm tra null
+            if (button != null) {
                 resetCard_FlipEffection(button);
             }
         }
@@ -230,6 +228,5 @@ public class HelloController {
             Platform.runLater(() -> isAnimating_During_restart = false); // Đặt lại trạng thái sau khi animation hoàn tất
         }).start();
     }
-
 }
 
