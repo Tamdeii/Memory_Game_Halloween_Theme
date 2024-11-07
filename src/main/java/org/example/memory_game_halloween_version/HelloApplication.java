@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class HelloApplication extends Application {
+
+    public static int SIZE = 2;
+
     private MediaPlayer mediaPlayer;
     private Scene sceneRootGame;
     private Scene sceneHomePage;
@@ -51,14 +54,14 @@ public class HelloApplication extends Application {
                 Media media = new Media(musicFileUrl.toString());
                 mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                mediaPlayer.play();
+                //mediaPlayer.play();
             }
 
             // Set up application icon and title
             Image icon = new Image(getClass().getResourceAsStream("/img/Logo.png"));
             stage.getIcons().add(icon);
             stage.setTitle("Memory Game Halloween Version");
-            stage.setResizable(false);
+            stage.setResizable(true);
 
             // Start the application with the home page scene
             stage.setScene(sceneHomePage);
@@ -69,11 +72,11 @@ public class HelloApplication extends Application {
     }
 
     public void switchToGameScene() {
-       primaryStage.setScene(sceneRootGame);
+        primaryStage.setScene(sceneRootGame);
     }
 
     public void switchToHomePage() {
-       primaryStage.setScene(sceneHomePage);
+        primaryStage.setScene(sceneHomePage);
     }
 
     public void toggleSound(){

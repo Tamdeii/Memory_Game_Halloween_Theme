@@ -14,6 +14,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class gameController {
     private HelloApplication mainApp;
@@ -67,8 +68,8 @@ public class gameController {
         gameMatrix.getChildren().clear();
         buttons.clear();
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < HelloApplication.SIZE; i++) {
+            for (int j = 0; j < HelloApplication.SIZE; j++) {
                 Button button = new Button();
                 button.setMinSize(110, 110);
                 ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
@@ -83,23 +84,40 @@ public class gameController {
     }
 
     private void setupCards() {
+
+        String[] images = {"/img/darkness.jpg", "/img/double.jpg", "/img/fairy.jpg",
+                "/img/fighting.jpg", "/img/fire.jpg", "/img/grass.jpg",
+                "/img/lightning.jpg", "/img/metal.jpg", "/img/psychic.jpg", "/img/water.jpg"};
+
         cardValues.clear();
-        cardValues.add(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
-        cardValues.add(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
+
+        Random randomGen = new Random();
+        int int_randomImage;
+        for (int count = 0; count < ((HelloApplication.SIZE * HelloApplication.SIZE) / 2) ; count++)
+        {
+            int_randomImage = randomGen.nextInt(images.length);
+            cardValues.add(new Image(getClass().getResource(images[int_randomImage]).toExternalForm()));
+            cardValues.add(new Image(getClass().getResource(images[int_randomImage]).toExternalForm()));
+        }
+
+
+//        cardValues.clear();
+//        cardValues.add(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
+//        cardValues.add(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
         Collections.shuffle(cardValues);
     }
 
