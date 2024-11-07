@@ -15,7 +15,7 @@ import java.net.URL;
 public class HelloApplication extends Application {
 
     public static int SIZE = 2;
-
+    // hello
     private MediaPlayer mediaPlayer;
     private Scene sceneRootGame;
     private Scene sceneHomePage;
