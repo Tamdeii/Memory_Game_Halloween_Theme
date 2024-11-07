@@ -1,62 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.memory_game_halloween_version.HelloController"
-      style="-fx-background-color: #2d2d2d;">
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.memory_game_halloween_version.gameController"
+            style="-fx-background-color: #2d2d2d;">
 
-    <!-- Padding -->
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+    <!-- Home Button at Top-Left -->
+    <ImageView fx:id="homeButton" fitWidth="30" fitHeight="30" preserveRatio="true"
+               layoutX="10" layoutY="10" />
 
-    <!-- The Title -->
-    <Label text="🎃 Memory of Fright 🕷"
-           styleClass="label-custom"
-    />
+    <!-- Main Content Centered -->
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <!-- Padding -->
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
 
+        <!-- Title -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label text="🎃 Memory of Fright 🕷"
+                   styleClass="label-custom"/>
+        </HBox>
 
-    <GridPane fx:id="gameMatrix" hgap="10" vgap="10"
-              alignment="CENTER" styleClass="grid-pane-custom">
-        <!-- ROW 0 -->
-        <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="0" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="0" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="0" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
+        <!-- Game Matrix -->
+        <GridPane fx:id="gameMatrix" hgap="10" vgap="10"
+                  alignment="CENTER" styleClass="grid-pane-custom">
+            <!-- ROW 0 -->
+            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
 
-        <!-- ROW 1 -->
-        <ImageView GridPane.rowIndex="1" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="1" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="1" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="1" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <!-- ROW 1 -->
+            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
 
-        <!-- ROW 2 -->
-        <ImageView GridPane.rowIndex="2" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="2" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="2" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="2" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <!-- ROW 2 -->
+            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
 
-        <!-- ROW 3 -->
-        <ImageView GridPane.rowIndex="3" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="3" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="3" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-        <ImageView GridPane.rowIndex="3" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
-    </GridPane>
+            <!-- ROW 3 -->
+            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
+            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
+        </GridPane>
 
-    <!-- POINTS -->
-    <HBox alignment="CENTER" spacing="10" styleClass="hbox-Points">
-        <Label fx:id="POINT" text="POINT: " styleClass="label-Points"/>
-        <Label fx:id="pointsLabel" text="0" styleClass="label-Points"/> <!-- Text màu trắng -->
-    </HBox>
+        <!-- Points Display -->
+        <HBox alignment="CENTER" spacing="10" styleClass="hbox-Points">
+            <Label fx:id="POINT" text="POINT: " styleClass="label-Points"/>
+            <Label fx:id="pointsLabel" text="0" styleClass="label-Points"/>
+        </HBox>
 
-    <!-- RESTART BUTTON -->
-    <Button fx:id="restartButton" alignment="CENTER" text="Restart Game" styleClass="button-restart" onAction="#restartButton"/>
-
-</VBox>
+        <!-- Restart Button -->
+        <Button fx:id="restartButton" alignment="CENTER" text="Restart Game" styleClass="button-restart" onAction="#restartButton"/>
+    </VBox>
+</AnchorPane>

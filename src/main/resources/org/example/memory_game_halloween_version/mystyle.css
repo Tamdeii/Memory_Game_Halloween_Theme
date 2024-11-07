@@ -1,5 +1,5 @@
 .label-custom {
-    -fx-font-size: 28px; /* Kích thước chữ */
+    -fx-font-size: 24px; /* Kích thước chữ */
     -fx-font-weight: bolder; /* Đậm chữ */
     -fx-text-fill:linear-gradient(to right, #dc5d05,#efbf3e); /* Màu chữ */
     -fx-background-radius: 15; /* Bo tròn nền */
@@ -21,13 +21,13 @@
 
 .label-Points {
     -fx-text-fill: white; /* Set text color to white */
-    -fx-font-size: 17px; /* Increase font size */
+    -fx-font-size: 15px; /* Increase font size */
     -fx-font-weight: bold; /* Make the text bold */
     -fx-font-family: "Roboto Light";
 }
 
 .button-restart {
-    -fx-background-color: #f36200; /* Màu nền cam */
+    -fx-background-color: #ff8c00; /* Màu nền cam */
     -fx-text-fill: #ffffff; /* Màu chữ trắng */
     -fx-font-weight: bold; /* Đậm chữ */
     -fx-border-color:  #a0522d; /* Màu viền đen */

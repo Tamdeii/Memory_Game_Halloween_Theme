@@ -8,21 +8,26 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.memory_game_halloween_version.HomePage"
+      fx:controller="org.example.memory_game_halloween_version.HomePageController"
       style="-fx-background-color: #2d2d2d;">
 
+    <!-- Padding -->
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
+    <!-- Title Label -->
     <Label text=" Memory of Fright "
            styleClass="label-custom"
     />
 
-    <ImageView fx:id="backgroundImage" fitWidth="600" fitHeight="300" pickOnBounds="true" preserveRatio="true" />
+    <!-- Logo Image -->
+    <ImageView fx:id="logoImageView" fitWidth="500" fitHeight="300" pickOnBounds="true" preserveRatio="true" />
 
-    <Button fx:id="startGameButton" text="Start Game" styleClass="button-start" />
+    <!-- Start Button -->
+    <Button fx:id="startButton" text="Start Game" />
 
-    <ToggleButton fx:id="soundToggleButton" text="Sound On" styleClass="button-sound" />
+    <!-- Sound Toggle Button -->
+    <ToggleButton fx:id="soundToggleButton" text="Sound: On" styleClass="button-sound" />
 
 </VBox>
