@@ -2,47 +2,89 @@ package org.example.memory_game_halloween_version;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.net.URL;
 
 public class HelloApplication extends Application {
     private MediaPlayer mediaPlayer;
+    private Scene sceneRootGame;
+    private Scene sceneHomePage;
+    private Stage primaryStage; // Store reference to primary stage
+    private boolean isSoundEnabled = true;
+    private gameController gameControllerInstance;
+    private  HomePageController homePageController;
+
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 500, 690);
+            this.primaryStage = stage; // Initialize primary stage reference
 
-            //getClass().getResource(): Use to link
-            //toExternalForm(): convert the link into string can used
-            scene.getStylesheets().add(getClass().getResource("mystyle.css").toExternalForm());
-            stage.setResizable(false);
-//            FXMLLoader fxmlLoader_homePage = new FXMLLoader(HelloApplication.class.getResource("home-page.fxml"));
-//            Scene scene = new Scene(fxmlLoader_homePage.load(), 500, 690);
-//            stage.setResizable(false);
+            // Load the game scene
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Parent gameRoot = gameLoader.load();
+            sceneRootGame = new Scene(gameRoot, 500, 745);
+            sceneRootGame.getStylesheets().add(getClass().getResource("mystyle.css").toExternalForm());
 
-            String musicFile = "/mp3/Halloween_Orchestra_Halloween_Night.mp3";
-            Media media = new Media(getClass().getResource(musicFile).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaPlayer.play();
+            // Load the home page scene
+            FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("home-page.fxml"));
+            Parent homeRoot = homeLoader.load();
+            sceneHomePage = new Scene(homeRoot, 500, 745);
+            sceneHomePage.getStylesheets().add(getClass().getResource("homePageCSS.css").toExternalForm());
 
-            Image icon = new Image(HelloApplication.class.getResourceAsStream("/img/Back_Group5_card.png"));
+            // Retrieve controllers and set main application reference
+            gameController gameController = gameLoader.getController();
+            gameController.setMainApp(this); // Ensure method name matches
+
+            HomePageController homeController = homeLoader.getController();
+            homeController.setMainApp(this); // Ensure method name matches
+
+            // Set up background music
+            URL musicFileUrl = getClass().getResource("/mp3/Halloween_Orchestra_Halloween_Night.mp3");
+            if (musicFileUrl != null) {
+                Media media = new Media(musicFileUrl.toString());
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                mediaPlayer.play();
+            }
+
+            // Set up application icon and title
+            Image icon = new Image(getClass().getResourceAsStream("/img/Logo.png"));
             stage.getIcons().add(icon);
             stage.setTitle("Memory Game Halloween Version");
-            stage.setScene(scene);
+            stage.setResizable(false);
+
+            // Start the application with the home page scene
+            stage.setScene(sceneHomePage);
             stage.show();
-        } catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void switchToGameScene() {
+       primaryStage.setScene(sceneRootGame);
+    }
+
+    public void switchToHomePage() {
+       primaryStage.setScene(sceneHomePage);
+    }
+
+    public void toggleSound(){
+        isSoundEnabled = !isSoundEnabled;
+        if (isSoundEnabled) {
+            mediaPlayer.play();
+        } else {
+            mediaPlayer.pause();
+        }
+    }
+
     public static void main(String[] args) {
         launch();
     }

@@ -1,0 +1,61 @@
+/* Đặt màu nền cho toàn bộ VBox */
+.root {
+    -fx-background-color: #2d2d2d; /* Màu nền tối */
+}
+
+/* Định dạng cho tiêu đề */
+.label-custom {
+    -fx-font-size: 28px; /* Kích thước chữ */
+    -fx-text-fill: linear-gradient(to right, #dc5d05, #efbf3e); /* Màu chữ gradient */
+    -fx-font-weight: bolder; /* Đậm chữ */
+    -fx-background-radius: 15; /* Bo tròn nền */
+    -fx-border-color: #dc5d05; /* Màu viền */
+    -fx-border-width: 2; /* Độ dày viền */
+    -fx-padding: 10; /* Khoảng cách bên trong */
+    -fx-effect: dropshadow(gaussian, rgba(255, 165, 0, 0.7), 10, 0, 0, 1); /* Bóng đổ */
+}
+
+/* Định dạng cho nút bắt đầu trò chơi */
+#startButton {
+    -fx-background-color: #dc5d05; /* Màu nền cam */
+    -fx-text-fill: white; /* Màu chữ trắng */
+    -fx-font-size: 24px; /* Kích thước chữ lớn hơn */
+    -fx-font-family: "Creepster", cursive; /* Font chữ ma mị */
+    -fx-font-weight: bold; /* In đậm chữ */
+    -fx-padding: 15px 30px; /* Padding cho nút */
+    -fx-border-radius: 10px; /* Bo góc */
+    -fx-background-radius: 10px; /* Bo góc nền */
+    -fx-border-color: #efbf3e; /* Màu viền vàng */
+    -fx-border-width: 2px; /* Độ dày viền */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ nhẹ */
+}
+
+#startButton:hover {
+    -fx-background-color: #efbf3e; /* Màu nền vàng khi hover */
+    -fx-text-fill: #2d2d2d; /* Màu chữ tối khi hover */
+}
+
+/* Định dạng cho nút âm thanh */
+.button-sound {
+    -fx-background-color: #5bdc05; /* Màu nền cam */
+    -fx-text-fill: white; /* Màu chữ trắng */
+    -fx-font-size: 20px; /* Kích thước chữ */
+    -fx-font-family: "Creepster", cursive; /* Font chữ ma mị */
+    -fx-font-weight: bold; /* In đậm chữ */
+    -fx-padding: 12px 25px; /* Padding cho nút */
+    -fx-border-radius: 8px; /* Bo góc */
+    -fx-background-radius: 8px; /* Bo góc nền */
+    -fx-border-color: #efbf3e; /* Màu viền vàng */
+    -fx-border-width: 2px; /* Độ dày viền */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ nhẹ */
+}
+
+.button-sound:hover {
+    -fx-background-color: #efbf3e; /* Màu nền vàng khi hover */
+    -fx-text-fill: #2d2d2d; /* Màu chữ tối khi hover */
+}
+
+/* Định dạng cho hình ảnh nền */
+#backgroundImage {
+    -fx-opacity: 0.8; /* Độ mờ cho hình ảnh nền */
+}

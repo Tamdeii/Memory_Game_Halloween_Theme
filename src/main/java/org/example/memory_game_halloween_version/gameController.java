@@ -2,6 +2,8 @@ package org.example.memory_game_halloween_version;
 
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,13 +14,15 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//import.java.scene.*
 
-public class HelloController {
-    @FXML
-    private Label pointsLabel, POINT;
-    @FXML
-    private GridPane gameMatrix;
+public class gameController {
+    private HelloApplication mainApp;
+    private HomePageController homePageController;
+
+    public int getPoints() {
+        return Points;
+    }
+
     private int Points = 0;
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Image> cardValues = new ArrayList<>();
@@ -27,12 +31,42 @@ public class HelloController {
     private boolean isAnimating_During_restart = false;
 
     @FXML
+    private ImageView homeButton;
+    @FXML
+    private Label pointsLabel, POINT;
+    @FXML
+    private GridPane gameMatrix;
+
+    // Method to set the main application reference
+    public void setMainApp(HelloApplication mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    @FXML
     public void initialize() {
+        setupHomeLogo();
         setupGameGrid();
         setupCards();
     }
 
+    private void setupHomeLogo() {
+        Image homeImage = new Image(getClass().getResource("/img/homeLogo.png").toExternalForm());
+        homeButton.setImage(homeImage);
+        homeButton.setOnMouseClicked(event -> goToHomePage());
+    }
+
+    private void goToHomePage() {
+        if (mainApp != null) {
+            mainApp.switchToHomePage();
+        } else {
+            System.err.println("Main application reference is null!");
+        }
+    }
+
     private void setupGameGrid() {
+        gameMatrix.getChildren().clear();
+        buttons.clear();
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 Button button = new Button();
@@ -71,11 +105,11 @@ public class HelloController {
 
     private void CardClick(Button clickedCard) {
         // Prevent clicking if two cards are already selected
-        if (firstCard != null && secondCard != null){
+        if (firstCard != null && secondCard != null) {
             return;
         }
 
-        if(!((ImageView) clickedCard.getGraphic()).getImage().getUrl().contains("/img/Back_Group5_card.png")){
+        if (!((ImageView) clickedCard.getGraphic()).getImage().getUrl().contains("/img/Back_Group5_card.png")) {
             return;
         }
 
@@ -88,7 +122,6 @@ public class HelloController {
 
         imageView.setFitWidth(100);
         imageView.setFitHeight(100);
-
         clickedCard.setGraphic(imageView);
 
         // Check if this is the first or second card clicked
@@ -114,15 +147,15 @@ public class HelloController {
         }
     }
 
-    private void flipCard(Button card, Image frontImage){
+    private void flipCard(Button card, Image frontImage) {
         ImageView backImageView = (ImageView) card.getGraphic();
 
-        //Create the scale-out animation
+        // Create the scale-out animation
         ScaleTransition scaleOut = new ScaleTransition(Duration.millis(10), backImageView);
         scaleOut.setFromX(1);
         scaleOut.setToX(0);
 
-        //Set front image halfway through the animation
+        // Set front image halfway through the animation
         scaleOut.setOnFinished(actionEvent -> {
             ImageView frontImageView = new ImageView(frontImage);
             frontImageView.setFitWidth(100);
@@ -142,19 +175,18 @@ public class HelloController {
             try {
                 Thread.sleep(1450);
             } catch (InterruptedException e) {
-
+                e.printStackTrace();
             }
             // Flip cards on JavaFX Application Thread
             Platform.runLater(() -> {
-                if (firstCard != null && secondCard != null){
+                if (firstCard != null && secondCard != null) {
                     ImageView backView1_Pause = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
                     ImageView backView2_Pause = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
                     backView1_Pause.setFitWidth(100);
                     backView1_Pause.setFitHeight(100);
-                    backView1_Pause.setPreserveRatio(false);
-
                     backView2_Pause.setFitWidth(100);
                     backView2_Pause.setFitHeight(100);
+                    backView1_Pause.setPreserveRatio(false);
                     backView2_Pause.setPreserveRatio(false);
 
                     firstCard.setGraphic(backView1_Pause);
@@ -166,13 +198,48 @@ public class HelloController {
         }).start();
     }
 
-    private void resetCard_FlipEffection(Button card_reset){
+    @FXML
+    private void restartButton() {
+        // Prevent until Animation done
+        if (isAnimating_During_restart) {
+            return; // Do nothing
+        }
+
+        // Restart Points
+        Points = 0;
+        pointsLabel.setText(String.valueOf(Points));
+        POINT.setText("Points");
+
+        // Reset the game grid and shuffle cards
+        setupGameGrid();
+        setupCards();
+
+        // Start the animation before restarting the game
+        isAnimating_During_restart = true;
+        for (Button button : buttons) {
+            if (button != null) {
+                resetCard_FlipEffect(button);
+            }
+        }
+
+        // Reset animation state after completion
+        new Thread(() -> {
+            try {
+                Thread.sleep(600); // Wait until animation completes
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(() -> isAnimating_During_restart = false);
+        }).start();
+    }
+
+    private void resetCard_FlipEffect(Button card_reset) {
         ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
         backImageView.setFitWidth(100);
         backImageView.setFitHeight(100);
 
         // scaleOut: front --> scaleIn: back
-        ScaleTransition scaleOut = new ScaleTransition(Duration.millis(100), card_reset.getGraphic());
+        ScaleTransition scaleOut = new ScaleTransition(Duration.millis(100), (ImageView) card_reset.getGraphic());
         scaleOut.setFromX(1);
         scaleOut.setToX(0);
 
@@ -186,47 +253,4 @@ public class HelloController {
         });
         scaleOut.play();
     }
-
-    @FXML
-    private void restartButton() {
-        //Prevent until Animation done
-        if (isAnimating_During_restart) {
-            return; // Return nothing
-        }
-
-        // Restart Point
-        Points = 0;
-        pointsLabel.setText(String.valueOf(Points));
-
-        // Set up card back to restart
-        for (Button button : buttons) {
-            if (button != null) {
-                ImageView backImageView_Restart = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
-                backImageView_Restart.setFitWidth(100);
-                backImageView_Restart.setFitHeight(100);
-                button.setGraphic(backImageView_Restart);
-            }
-        }
-
-        setupCards();
-
-        // Start the animation before restart the game
-        isAnimating_During_restart = true;
-        for (Button button : buttons) {
-            if (button != null) {
-                resetCard_FlipEffection(button);
-            }
-        }
-
-        // Đặt lại trạng thái animation sau khi hoàn tất
-        new Thread(() -> {
-            try {
-                Thread.sleep(600); // Chờ cho đến khi animation hoàn tất
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(() -> isAnimating_During_restart = false); // Đặt lại trạng thái sau khi animation hoàn tất
-        }).start();
-    }
 }
-
