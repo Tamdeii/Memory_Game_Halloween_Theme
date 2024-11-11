@@ -47,7 +47,7 @@ public class HelloApplication extends Application {
             // Retrieve controllers and set main application reference
             gameController gameController = gameLoader.getController();
             gameController.setMainApp(this); // Ensure method name matches
-            gameController.setStage(primaryStage);
+//            gameController.setStage(primaryStage);
             gameController.setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
             gameController.setupGame();
 
@@ -64,7 +64,7 @@ public class HelloApplication extends Application {
             }
 
             // Set up application icon and title
-            Image icon = new Image(getClass().getResourceAsStream("/img/Logo.png"));
+            Image icon = new Image(getClass().getResourceAsStream("/img/Logo_game.jpg"));
             stage.getIcons().add(icon);
             stage.setTitle("Memory Game Halloween Version");
             stage.setResizable(true);

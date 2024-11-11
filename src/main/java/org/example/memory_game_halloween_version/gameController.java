@@ -8,16 +8,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.awt.event.MouseEvent;
 import java.util.*;
 
 public class gameController {
     private HelloApplication mainApp;
     private HomePageController homePageController;
-    private Stage stage;
+//    private Stage stage;
     private static GridDimension dimension;
+    private static boolean if_shift = true;
     private static int b_w;
     private static int b_h;
     private static int i_w;
@@ -34,19 +36,20 @@ public class gameController {
     private Button secondCard = null;
     private boolean isAnimating_During_restart = false;
 
-
+    @FXML
+    private Label Label_title;
     @FXML
     private ImageView homeButton;
+    @FXML
+    private ImageView restartButton;
     @FXML
     private Label pointsLabel, POINT;
     @FXML
     private GridPane gameMatrix;
 
     // Method to set the main application reference
-    public void setMainApp(HelloApplication mainApp) {
-        this.mainApp = mainApp;
-    }
-    public void setStage(Stage stage) { this.stage = stage;}
+    public void setMainApp(HelloApplication mainApp) { this.mainApp = mainApp; }
+//    public void setStage(Stage stage) { this.stage = stage;}
     public void setDimension(int size, int scene_width) {
         this.dimension = new GridDimension(size, scene_width);
         b_w = dimension.button_width;
@@ -62,18 +65,27 @@ public class gameController {
 //        setupCards();
     }
 
+
     public void setupGame() {
         setupGameGrid();
         setupCards();
     }
 
     private void setupHomeLogo() {
-        Image homeImage = new Image(getClass().getResource("/img/homeLogo.png").toExternalForm());
+        Image homeImage = new Image(getClass().getResource("/img/Logo_button_home.jpg").toExternalForm());
         homeButton.setImage(homeImage);
         homeButton.setOnMouseClicked(event -> goToHomePage());
+
+        Image restart_image = new Image(getClass().getResource("/img/Logo_button_restart.jpg").toExternalForm());
+        restartButton.setImage(restart_image);
+        restartButton.setOnMouseClicked(event -> restartGame());
+        homeButton.toFront();
+        restartButton.toFront();
     }
 
+    @FXML
     private void goToHomePage() {
+        System.out.println("HELLLLLLLL");
         if (mainApp != null) {
             mainApp.switchToHomePage();
         } else {
@@ -83,10 +95,15 @@ public class gameController {
 
     private void setupGameGrid() {
         gameMatrix.getChildren().clear();
-        if (HelloApplication.SIZE == 2)
+        if (HelloApplication.SIZE == 2 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getTranslateY() + 40);
-        else if (HelloApplication.SIZE == 4)
+            if_shift = false;
+        }
+        else if (HelloApplication.SIZE == 4 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getTranslateY() + 20);
+//            Label_title.setTranslateY(gameMatrix.getTranslateY() + 5);
+            if_shift = false;
+        }
         else{}
 
         buttons.clear();
@@ -95,7 +112,7 @@ public class gameController {
             for (int j = 0; j < HelloApplication.SIZE; j++) {
                 Button button = new Button();
                 button.setMinSize(b_w, b_h);
-                ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
+                ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Logo_Back_Group5_card.jpg").toExternalForm()));
                 backImageView.setFitWidth(i_w);
                 backImageView.setFitHeight(i_h);
                 button.setGraphic(backImageView);
@@ -117,8 +134,8 @@ public class gameController {
 
         String[] images_name_str = {"/img/1_skeleton.jpg", "/img/2_grimreaper.jpg", "/img/3_werewolf.jpg",
                 "/img/4_mummy.jpg", "/img/5_frankenstein.jpg", "/img/6_dracula.jpg",
-                "/img/7_ghoul.jpg", "/img/8_pumpkin.jpg", "/img/9_pirate.png",
-                "/img/10_batman.png", "/img/11_catpumpkin.jpg", "/img/12_courage.jpg"};
+                "/img/7_ghoul.jpg", "/img/8_pumpkin.jpg", "/img/9_pirate.jpg",
+                "/img/10_batman.jpg", "/img/11_catpumpkin.jpg", "/img/12_courage.jpg"};
 
         ArrayList<String> images_name_arrl = new ArrayList<>();
         images_name_arrl.clear();
@@ -153,7 +170,7 @@ public class gameController {
             return;
         }
 
-        if (!((ImageView) clickedCard.getGraphic()).getImage().getUrl().contains("/img/Back_Group5_card.png")) {
+        if (!((ImageView) clickedCard.getGraphic()).getImage().getUrl().contains("/img/Logo_Back_Group5_card.jpg")) {
             return;
         }
 
@@ -224,8 +241,8 @@ public class gameController {
             // Flip cards on JavaFX Application Thread
             Platform.runLater(() -> {
                 if (firstCard != null && secondCard != null) {
-                    ImageView backView1_Pause = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
-                    ImageView backView2_Pause = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
+                    ImageView backView1_Pause = new ImageView(new Image(getClass().getResource("/img/Logo_Back_Group5_card.jpg").toExternalForm()));
+                    ImageView backView2_Pause = new ImageView(new Image(getClass().getResource("/img/Logo_Back_Group5_card.jpg").toExternalForm()));
                     backView1_Pause.setFitWidth(i_w);
                     backView1_Pause.setFitHeight(i_h);
                     backView2_Pause.setFitWidth(i_w);
@@ -243,7 +260,7 @@ public class gameController {
     }
 
     @FXML
-    private void restartButton() {
+    private void restartGame() {
         // Prevent until Animation done
         if (isAnimating_During_restart) {
             return; // Do nothing
@@ -278,7 +295,7 @@ public class gameController {
     }
 
     private void resetCard_FlipEffect(Button card_reset) {
-        ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
+        ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Logo_Back_Group5_card.jpg").toExternalForm()));
         backImageView.setFitWidth(i_w);
         backImageView.setFitHeight(i_h);
 

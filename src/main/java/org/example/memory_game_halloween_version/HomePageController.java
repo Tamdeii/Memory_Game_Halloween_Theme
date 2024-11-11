@@ -1,9 +1,6 @@
 package org.example.memory_game_halloween_version;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -45,7 +42,7 @@ public class HomePageController {
     }
 
     private void setUplogoImageView() {
-        Image logoImage = new Image(getClass().getResource("/img/Logo.png").toExternalForm());
+        Image logoImage = new Image(getClass().getResource("/img/Logo_game.jpg").toExternalForm());
         logoImageView.setImage(logoImage);
     }
 
