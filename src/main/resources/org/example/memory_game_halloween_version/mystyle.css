@@ -34,7 +34,7 @@
     -fx-border-width: 2px; /* Độ dày viền */
     -fx-border-radius: 7px; /* Bo tròn viền */
     -fx-padding: 5; /* Khoảng cách bên trong */
-    -fx-font-size: 18px; /* Kích thước chữ */
+    -fx-font-size: 12px; /* Kích thước chữ */
     -fx-opacity: 0.9; /* Độ trong suốt */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ */
 }

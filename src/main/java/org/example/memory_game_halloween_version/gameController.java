@@ -2,23 +2,26 @@ package org.example.memory_game_halloween_version;
 
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class gameController {
     private HelloApplication mainApp;
     private HomePageController homePageController;
+    private Stage stage;
+    private static GridDimension dimension;
+    private static int b_w;
+    private static int b_h;
+    private static int i_w;
+    private static int i_h;
 
     public int getPoints() {
         return Points;
@@ -31,6 +34,7 @@ public class gameController {
     private Button secondCard = null;
     private boolean isAnimating_During_restart = false;
 
+
     @FXML
     private ImageView homeButton;
     @FXML
@@ -42,10 +46,23 @@ public class gameController {
     public void setMainApp(HelloApplication mainApp) {
         this.mainApp = mainApp;
     }
+    public void setStage(Stage stage) { this.stage = stage;}
+    public void setDimension(int size, int scene_width) {
+        this.dimension = new GridDimension(size, scene_width);
+        b_w = dimension.button_width;
+        b_h = dimension.button_height;
+        i_w = dimension.image_height;
+        i_h = dimension.image_height;
+    }
 
     @FXML
     public void initialize() {
         setupHomeLogo();
+//        setupGameGrid();
+//        setupCards();
+    }
+
+    public void setupGame() {
         setupGameGrid();
         setupCards();
     }
@@ -66,15 +83,21 @@ public class gameController {
 
     private void setupGameGrid() {
         gameMatrix.getChildren().clear();
+        if (HelloApplication.SIZE == 2)
+            gameMatrix.setTranslateY(gameMatrix.getTranslateY() + 40);
+        else if (HelloApplication.SIZE == 4)
+            gameMatrix.setTranslateY(gameMatrix.getTranslateY() + 20);
+        else{}
+
         buttons.clear();
 
         for (int i = 0; i < HelloApplication.SIZE; i++) {
             for (int j = 0; j < HelloApplication.SIZE; j++) {
                 Button button = new Button();
-                button.setMinSize(110, 110);
+                button.setMinSize(b_w, b_h);
                 ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
-                backImageView.setFitWidth(100);
-                backImageView.setFitHeight(100);
+                backImageView.setFitWidth(i_w);
+                backImageView.setFitHeight(i_h);
                 button.setGraphic(backImageView);
                 button.setOnAction(e -> CardClick(button));
                 gameMatrix.add(button, j, i);
@@ -83,41 +106,44 @@ public class gameController {
         }
     }
 
+    private Map<String, Image> imageCache = new HashMap<>();
+
+    private Image loadImage(String path) {
+        return imageCache.computeIfAbsent(path, p -> new Image(getClass().getResource(p).toExternalForm()));
+    }
+
     private void setupCards() {
-
-        String[] images = {"/img/darkness.jpg", "/img/double.jpg", "/img/fairy.jpg",
-                "/img/fighting.jpg", "/img/fire.jpg", "/img/grass.jpg",
-                "/img/lightning.jpg", "/img/metal.jpg", "/img/psychic.jpg", "/img/water.jpg"};
-
         cardValues.clear();
 
-        Random randomGen = new Random();
-        int int_randomImage;
+        String[] images_name_str = {"/img/1_skeleton.jpg", "/img/2_grimreaper.jpg", "/img/3_werewolf.jpg",
+                "/img/4_mummy.jpg", "/img/5_frankenstein.jpg", "/img/6_dracula.jpg",
+                "/img/7_ghoul.jpg", "/img/8_pumpkin.jpg", "/img/9_pirate.png",
+                "/img/10_batman.png", "/img/11_catpumpkin.jpg", "/img/12_courage.jpg"};
+
+        ArrayList<String> images_name_arrl = new ArrayList<>();
+        images_name_arrl.clear();
+        for (int count = 0; count < images_name_str.length; count ++)
+        {
+            images_name_arrl.add(images_name_str[count]);
+        }
+        Collections.shuffle(images_name_arrl);
+
+        int index_random = 0;
         for (int count = 0; count < ((HelloApplication.SIZE * HelloApplication.SIZE) / 2) ; count++)
         {
-            int_randomImage = randomGen.nextInt(images.length);
-            cardValues.add(new Image(getClass().getResource(images[int_randomImage]).toExternalForm()));
-            cardValues.add(new Image(getClass().getResource(images[int_randomImage]).toExternalForm()));
+            Image image = new Image(getClass().getResource(images_name_arrl.get(index_random)).toExternalForm());
+            cardValues.add(image);
+            cardValues.add(image);
+            if (index_random >= (images_name_str.length - 1)){
+                Random random = new Random();
+                index_random = random.nextInt(images_name_str.length);
+                Collections.shuffle(images_name_arrl);
+            }
+            else {
+                index_random++;
+            }
         }
 
-
-//        cardValues.clear();
-//        cardValues.add(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/darkness.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/double.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/fairy.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/fighting.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/fire.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/grass.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/lightning.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
-//        cardValues.add(new Image(getClass().getResource("/img/metal.jpg").toExternalForm()));
         Collections.shuffle(cardValues);
     }
 
@@ -138,8 +164,8 @@ public class gameController {
         Image frontImage = cardValues.get(index);
         flipCard(clickedCard, frontImage);  //Flip card animation
 
-        imageView.setFitWidth(100);
-        imageView.setFitHeight(100);
+        imageView.setFitWidth(i_w);
+        imageView.setFitHeight(i_h);
         clickedCard.setGraphic(imageView);
 
         // Check if this is the first or second card clicked
@@ -176,8 +202,8 @@ public class gameController {
         // Set front image halfway through the animation
         scaleOut.setOnFinished(actionEvent -> {
             ImageView frontImageView = new ImageView(frontImage);
-            frontImageView.setFitWidth(100);
-            frontImageView.setFitHeight(100);
+            frontImageView.setFitWidth(i_w);
+            frontImageView.setFitHeight(i_h);
             card.setGraphic(frontImageView);
 
             ScaleTransition scaleIn = new ScaleTransition(Duration.millis(500), frontImageView);
@@ -200,10 +226,10 @@ public class gameController {
                 if (firstCard != null && secondCard != null) {
                     ImageView backView1_Pause = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
                     ImageView backView2_Pause = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
-                    backView1_Pause.setFitWidth(100);
-                    backView1_Pause.setFitHeight(100);
-                    backView2_Pause.setFitWidth(100);
-                    backView2_Pause.setFitHeight(100);
+                    backView1_Pause.setFitWidth(i_w);
+                    backView1_Pause.setFitHeight(i_h);
+                    backView2_Pause.setFitWidth(i_w);
+                    backView2_Pause.setFitHeight(i_h);
                     backView1_Pause.setPreserveRatio(false);
                     backView2_Pause.setPreserveRatio(false);
 
@@ -253,8 +279,8 @@ public class gameController {
 
     private void resetCard_FlipEffect(Button card_reset) {
         ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Back_Group5_card.png").toExternalForm()));
-        backImageView.setFitWidth(100);
-        backImageView.setFitHeight(100);
+        backImageView.setFitWidth(i_w);
+        backImageView.setFitHeight(i_h);
 
         // scaleOut: front --> scaleIn: back
         ScaleTransition scaleOut = new ScaleTransition(Duration.millis(100), (ImageView) card_reset.getGraphic());

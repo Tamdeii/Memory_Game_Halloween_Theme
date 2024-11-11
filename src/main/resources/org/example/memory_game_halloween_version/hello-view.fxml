@@ -14,56 +14,58 @@
 
     <!-- Home Button at Top-Left -->
     <ImageView fx:id="homeButton" fitWidth="30" fitHeight="30" preserveRatio="true"
-               layoutX="10" layoutY="10" />
+               layoutX="10" layoutY="15" />
+    <!-- Restart Button -->
+    <Button fx:id="restartButton" alignment="CENTER" text="Restart" styleClass="button-restart" onAction="#restartButton"
+            prefWidth="100" prefHeight="10"
+            layoutX="590" layoutY="15"/>
 
-    <!-- Main Content Centered -->
-    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-        <!-- Padding -->
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
+    <VBox alignment="CENTER" spacing="30" AnchorPane.topAnchor="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-        <!-- Title -->
         <HBox alignment="CENTER" spacing="10">
             <Label text="🎃 Memory of Fright 🕷"
                    styleClass="label-custom"/>
         </HBox>
+    </VBox>
 
+    <!-- Main Content Centered -->
+    <VBox alignment="CENTER" spacing="30" AnchorPane.topAnchor="90" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <!-- Padding -->
+        <padding>
+            <Insets top="0" right="20" bottom="20" left="20"/>
+        </padding>
+
+<!--        &lt;!&ndash; Title &ndash;&gt;-->
+<!--        <HBox alignment="CENTER" spacing="10">-->
+<!--            <Label text="🎃 Memory of Fright 🕷"-->
+<!--                   styleClass="label-custom"/>-->
+<!--        </HBox>-->
         <!-- Game Matrix -->
-        <GridPane fx:id="gameMatrix" hgap="10" vgap="10"
+        <GridPane fx:id="gameMatrix" hgap="15" vgap="15"
                   alignment="CENTER" styleClass="grid-pane-custom">
-            <!-- ROW 0 -->
-            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="0" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
 
-            <!-- ROW 1 -->
-            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="1" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
-
-            <!-- ROW 2 -->
-            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="2" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
-
-            <!-- ROW 3 -->
-            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="0" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="1" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="2" fitWidth="100" fitHeight="100" preserveRatio="true" />
-            <ImageView GridPane.rowIndex="3" GridPane.columnIndex="3" fitWidth="100" fitHeight="100" preserveRatio="true" />
         </GridPane>
 
-        <!-- Points Display -->
-        <HBox alignment="CENTER" spacing="10" styleClass="hbox-Points">
+<!--        &lt;!&ndash; Points Display &ndash;&gt;-->
+<!--        <HBox alignment="CENTER" spacing="10" styleClass="hbox-Points">-->
+<!--            <Label fx:id="POINT" text="POINT: " styleClass="label-Points"/>-->
+<!--            <Label fx:id="pointsLabel" text="0" styleClass="label-Points"/>-->
+<!--        </HBox>-->
+
+<!--        &lt;!&ndash; Restart Button &ndash;&gt;-->
+<!--        <Button fx:id="restartButton" alignment="CENTER" text="Restart Game" styleClass="button-restart" onAction="#restartButton"-->
+<!--                layoutY="800"/>-->
+
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="690" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <HBox alignment="CENTER" spacing="40" styleClass="hbox-Points"
+              layoutX="600" >
             <Label fx:id="POINT" text="POINT: " styleClass="label-Points"/>
             <Label fx:id="pointsLabel" text="0" styleClass="label-Points"/>
         </HBox>
-
-        <!-- Restart Button -->
-        <Button fx:id="restartButton" alignment="CENTER" text="Restart Game" styleClass="button-restart" onAction="#restartButton"/>
     </VBox>
+
+
+
 </AnchorPane>
