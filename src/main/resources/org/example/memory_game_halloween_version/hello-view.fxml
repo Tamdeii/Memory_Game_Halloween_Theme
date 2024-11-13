@@ -20,7 +20,7 @@
 
     <!-- Restart Button -->
     <ImageView fx:id="restartButton"
-               fitWidth="30" fitHeight="30" preserveRatio="true"
+               fitWidth="30" fitHeight="30"
                onMouseClicked="#restartGame"
                layoutX="660" layoutY="15"/>
 
@@ -67,8 +67,8 @@
     <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="690" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
         <HBox alignment="CENTER" spacing="40" styleClass="hbox-Points"
               layoutX="600" >
-            <Label fx:id="POINT" text="POINT: " styleClass="label-Points"/>
-            <Label fx:id="pointsLabel" text="0" styleClass="label-Points"/>
+            <Label fx:id="Timer_Label" text="" styleClass="label-Points"/>
+            <Label fx:id="Timer" text="" styleClass="label-Points"/>
         </HBox>
     </VBox>
 
