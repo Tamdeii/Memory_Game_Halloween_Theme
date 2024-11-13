@@ -1,6 +1,8 @@
 package org.example.memory_game_halloween_version;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +19,6 @@ import java.util.*;
 public class gameController {
     private HelloApplication mainApp;
     private HomePageController homePageController;
-//    private Stage stage;
     private static GridDimension dimension;
     private static boolean if_shift = true;
     private static int b_w;
@@ -25,11 +26,10 @@ public class gameController {
     private static int i_w;
     private static int i_h;
 
-    public int getPoints() {
-        return Points;
-    }
-
-    private int Points = 0;
+    private int timer = 20;
+    private boolean timeStared = false;
+    private boolean isGameOver = false;
+    private Timeline countdownTimeline;
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Image> cardValues = new ArrayList<>();
     private Button firstCard = null;
@@ -37,19 +37,17 @@ public class gameController {
     private boolean isAnimating_During_restart = false;
 
     @FXML
-    private Label Label_title;
-    @FXML
     private ImageView homeButton;
     @FXML
     private ImageView restartButton;
     @FXML
-    private Label pointsLabel, POINT;
+    private Label Timer_Label, Timer;
     @FXML
     private GridPane gameMatrix;
 
     // Method to set the main application reference
     public void setMainApp(HelloApplication mainApp) { this.mainApp = mainApp; }
-//    public void setStage(Stage stage) { this.stage = stage;}
+    //    public void setStage(Stage stage) { this.stage = stage;}
     public void setDimension(int size, int scene_width) {
         this.dimension = new GridDimension(size, scene_width);
         b_w = dimension.button_width;
@@ -61,16 +59,8 @@ public class gameController {
     @FXML
     public void initialize() {
         setupHomeLogo();
-//        setupGameGrid();
-//        setupCards();
+        setupTimer();
     }
-
-
-    public void setupGame() {
-        setupGameGrid();
-        setupCards();
-    }
-
     private void setupHomeLogo() {
         Image homeImage = new Image(getClass().getResource("/img/Logo_button_home.jpg").toExternalForm());
         homeButton.setImage(homeImage);
@@ -82,10 +72,55 @@ public class gameController {
         homeButton.toFront();
         restartButton.toFront();
     }
+    private void setupTimer() {
+        Timer_Label.setText("");
+        Timer.setText("Let's start");
+        countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            timer--;
+            updateTimerLabel();
+            if (timer <= 0) {
+                endGame();
+                countdownTimeline.stop();
+            }
+        }));
+        countdownTimeline.setCycleCount(Timeline.INDEFINITE);
+        if (timeStared == true){
+            countdownTimeline.play();
+        }
+    }
+
+    private void updateTimerLabel() {
+        int minutes = timer / 60;
+        int seconds = timer % 60;
+        Timer.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+
+    private void endGame() {
+        // Handle game-over logic, such as displaying a message
+        timer = 20;
+        timeStared = false;
+        isGameOver = true;
+        System.out.println("Time's up! Game Over.");
+        Timer_Label.setText("Time's up!");
+        Timer.setText("Game Over.");
+        countdownTimeline.stop();
+    }
+
+    public void setupGame() {
+        setupGameGrid();
+        setupCards();
+    }
+
+    private void startTimer() {
+        if (!timeStared) {
+            timeStared = true;
+            countdownTimeline.play();
+        }
+    }
 
     @FXML
     private void goToHomePage() {
-        System.out.println("HELLLLLLLL");
+        System.out.println("HELLLLL");
         if (mainApp != null) {
             mainApp.switchToHomePage();
         } else {
@@ -165,6 +200,10 @@ public class gameController {
     }
 
     private void CardClick(Button clickedCard) {
+        if (isGameOver) {
+            return;
+        }
+        startTimer();
         // Prevent clicking if two cards are already selected
         if (firstCard != null && secondCard != null) {
             return;
@@ -192,14 +231,14 @@ public class gameController {
             secondCard = clickedCard;
             // Check whether they are the same
             if (((ImageView) firstCard.getGraphic()).getImage().getUrl().equals(((ImageView) secondCard.getGraphic()).getImage().getUrl())) {
-                Points+=10;
-                if (Points == 80){
-                    pointsLabel.setText("YOU WIN");
-                    POINT.setText("");
-                } else if (Points < 80) {
-                    pointsLabel.setText(String.valueOf(Points));
-                    System.out.println("MATCHED: Point: " + Points);
-                }
+//                Points+=10;
+//                if (Points == 80){
+//                    pointsLabel.setText("YOU WIN");
+//                    POINT.setText("");
+//                } else if (Points < 80) {
+//                    pointsLabel.setText(String.valueOf(Points));
+//                    System.out.println("MATCHED: Point: " + Points);
+//                }
                 firstCard = null;
                 secondCard = null;
             } else {
@@ -262,18 +301,17 @@ public class gameController {
     @FXML
     private void restartGame() {
         // Prevent until Animation done
-        if (isAnimating_During_restart) {
-            return; // Do nothing
-        }
-
-        // Restart Points
-        Points = 0;
-        pointsLabel.setText(String.valueOf(Points));
-        POINT.setText("Points");
+        if (isAnimating_During_restart) return; // Do nothing
+        //haha
+        // Restart Timer
+        timer = 20;
+        timeStared = false;
+        isGameOver = false;
+        countdownTimeline.stop();
+        setupTimer();
 
         // Reset the game grid and shuffle cards
-        setupGameGrid();
-        setupCards();
+        setupGame();
 
         // Start the animation before restarting the game
         isAnimating_During_restart = true;
@@ -284,14 +322,15 @@ public class gameController {
         }
 
         // Reset animation state after completion
-        new Thread(() -> {
-            try {
-                Thread.sleep(600); // Wait until animation completes
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(() -> isAnimating_During_restart = false);
-        }).start();
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(600); // Wait until animation completes
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            Platform.runLater(() -> isAnimating_During_restart = false);
+//        }).start();
+        new Timeline(new KeyFrame(Duration.seconds(0.6), event -> isAnimating_During_restart = false)).play();
     }
 
     private void resetCard_FlipEffect(Button card_reset) {
