@@ -20,7 +20,7 @@
 
     <!-- Restart Button -->
     <ImageView fx:id="restartButton"
-               fitWidth="30" fitHeight="30" preserveRatio="true"
+               fitWidth="30" fitHeight="30"
                onMouseClicked="#restartGame"
                layoutX="660" layoutY="15"/>
 

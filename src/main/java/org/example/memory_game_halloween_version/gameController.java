@@ -85,7 +85,7 @@ public class gameController {
 
     @FXML
     private void goToHomePage() {
-        System.out.println("HELLLLLLLL");
+        System.out.println("HELLLLL");
         if (mainApp != null) {
             mainApp.switchToHomePage();
         } else {

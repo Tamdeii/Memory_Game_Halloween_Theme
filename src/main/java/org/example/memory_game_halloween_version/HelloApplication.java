@@ -60,7 +60,7 @@ public class HelloApplication extends Application {
                 Media media = new Media(musicFileUrl.toString());
                 mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                //mediaPlayer.play();
+                mediaPlayer.play();
             }
 
             // Set up application icon and title
