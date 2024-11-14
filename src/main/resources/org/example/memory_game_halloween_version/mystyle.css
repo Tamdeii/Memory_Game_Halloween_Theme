@@ -34,7 +34,7 @@
     -fx-border-width: 2px; /* Độ dày viền */
     -fx-border-radius: 7px; /* Bo tròn viền */
     -fx-padding: 5; /* Khoảng cách bên trong */
-    -fx-font-size: 18px; /* Kích thước chữ */
+    -fx-font-size: 12px; /* Kích thước chữ */
     -fx-opacity: 0.9; /* Độ trong suốt */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ */
 }
@@ -45,4 +45,40 @@
     -fx-border-color: #ff7518; /* Màu viền khi hover */
     -fx-opacity: 1; /* Độ trong suốt khi hover */
     -fx-border-radius: 7px;
+}
+/* General button styles */
+.button {
+    width: 80px; /* Set width for square shape */
+    height: 80px; /* Set height for square shape */
+    border-radius: 10px; /* Rounded corners */
+    color: white; /* Text color */
+    font-size: 20px; /* Text size */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Specific styles for each button */
+#level_1 {
+    background-color: green; /* Level 1 color */
+}
+
+#level_1:hover {
+    background-color: darkgreen; /* Hover effect for Level 1 */
+}
+
+#level_2 {
+    background-color: red; /* Level 2 color */
+}
+
+#level_2:hover {
+    background-color: darkred; /* Hover effect for Level 2 */
+}
+
+#level_3 {
+    background-color: purple; /* Level 3 color */
+}
+
+#level_3:hover {
+    background-color: darkviolet; /* Hover effect for Level 3 */
 }

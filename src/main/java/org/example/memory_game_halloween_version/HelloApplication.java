@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.net.URL;
 
 public class HelloApplication extends Application {
+
+    public static int SIZE = 4;
+    public static int SCENE_WIDTH = 700;
+    public static int SCENE_HEIGHT = 745;
+
     private MediaPlayer mediaPlayer;
     private Scene sceneRootGame;
     private Scene sceneHomePage;
@@ -23,24 +28,28 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) {
+
         try {
             this.primaryStage = stage; // Initialize primary stage reference
 
             // Load the game scene
             FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent gameRoot = gameLoader.load();
-            sceneRootGame = new Scene(gameRoot, 500, 745);
+            sceneRootGame = new Scene(gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
             sceneRootGame.getStylesheets().add(getClass().getResource("mystyle.css").toExternalForm());
 
             // Load the home page scene
             FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("home-page.fxml"));
             Parent homeRoot = homeLoader.load();
-            sceneHomePage = new Scene(homeRoot, 500, 745);
+            sceneHomePage = new Scene(homeRoot, SCENE_WIDTH, SCENE_HEIGHT);
             sceneHomePage.getStylesheets().add(getClass().getResource("homePageCSS.css").toExternalForm());
 
             // Retrieve controllers and set main application reference
             gameController gameController = gameLoader.getController();
             gameController.setMainApp(this); // Ensure method name matches
+//            gameController.setStage(primaryStage);
+            gameController.setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+            gameController.setupGame();
 
             HomePageController homeController = homeLoader.getController();
             homeController.setMainApp(this); // Ensure method name matches
@@ -55,10 +64,10 @@ public class HelloApplication extends Application {
             }
 
             // Set up application icon and title
-            Image icon = new Image(getClass().getResourceAsStream("/img/Logo.png"));
+            Image icon = new Image(getClass().getResourceAsStream("/img/Logo_game.jpg"));
             stage.getIcons().add(icon);
             stage.setTitle("Memory Game Halloween Version");
-            stage.setResizable(false);
+            stage.setResizable(true);
 
             // Start the application with the home page scene
             stage.setScene(sceneHomePage);
@@ -69,11 +78,11 @@ public class HelloApplication extends Application {
     }
 
     public void switchToGameScene() {
-       primaryStage.setScene(sceneRootGame);
+        primaryStage.setScene(sceneRootGame);
     }
 
     public void switchToHomePage() {
-       primaryStage.setScene(sceneHomePage);
+        primaryStage.setScene(sceneHomePage);
     }
 
     public void toggleSound(){
