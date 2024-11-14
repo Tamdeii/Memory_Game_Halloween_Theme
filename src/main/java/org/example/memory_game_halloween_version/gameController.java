@@ -302,7 +302,7 @@ public class gameController {
     private void restartGame() {
         // Prevent until Animation done
         if (isAnimating_During_restart) return; // Do nothing
-        //haha
+        //
         // Restart Timer
         timer = 20;
         timeStared = false;
