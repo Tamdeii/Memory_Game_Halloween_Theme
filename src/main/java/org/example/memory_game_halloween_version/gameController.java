@@ -28,7 +28,7 @@ public class gameController {
     private static int i_h;
     private static boolean if_shift = true;
 
-    private int timer = 20;
+    private int timer = 10;
     private boolean timeStared = false;
     private boolean isGameOver = false;
     private Timeline countdownTimeline;
@@ -107,9 +107,21 @@ public class gameController {
             Timer_Label.setText("Time's up!");
             Timer.setText("Game Over.");
         }
-        timer = 20;
+        resetTimer();
         timeStared = false;
         isGameOver = true;
+    }
+
+    public void resetTimer(){
+        if (HelloApplication.SIZE == 2){
+            timer = 10;
+        } else if (HelloApplication.SIZE == 4) {
+            timer = 80;
+        } else if (HelloApplication.SIZE == 6) {
+            timer = 160;
+        } else {
+            timer = 40;
+        }
     }
 
     public void setupGame() {
@@ -306,7 +318,7 @@ public class gameController {
         if (isAnimating_During_restart) return; // Do nothing
         //
         matchedPairs = 0;
-        timer = 20;
+        resetTimer();
         timeStared = false;
         isGameOver = false;
         countdownTimeline.stop();
