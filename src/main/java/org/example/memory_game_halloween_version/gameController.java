@@ -3,7 +3,9 @@ package org.example.memory_game_halloween_version;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,11 +22,11 @@ public class gameController {
     private HelloApplication mainApp;
     private HomePageController homePageController;
     private static GridDimension dimension;
-    private static boolean if_shift = true;
     private static int b_w;
     private static int b_h;
     private static int i_w;
     private static int i_h;
+    private static boolean if_shift = true;
 
     private int timer = 20;
     private boolean timeStared = false;
@@ -131,11 +133,11 @@ public class gameController {
     private void setupGameGrid() {
         gameMatrix.getChildren().clear();
         if (HelloApplication.SIZE == 2 && if_shift) {
-            gameMatrix.setTranslateY(gameMatrix.getTranslateY() + 40);
+            gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 40);
             if_shift = false;
         }
         else if (HelloApplication.SIZE == 4 && if_shift) {
-            gameMatrix.setTranslateY(gameMatrix.getTranslateY() + 20);
+            gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 20);
 //            Label_title.setTranslateY(gameMatrix.getTranslateY() + 5);
             if_shift = false;
         }
@@ -352,5 +354,32 @@ public class gameController {
             scaleIn.play();
         });
         scaleOut.play();
+    }
+
+    public void restartGamelevel1(ActionEvent actionEvent) {
+        HelloApplication.SIZE = 2;
+        gameMatrix.setTranslateY(0);
+        if_shift = true;
+        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setupGame();
+        restartGame();
+    }
+
+    public void restartGamelevel2(ActionEvent actionEvent) {
+        HelloApplication.SIZE = 4;
+        gameMatrix.setTranslateY(0);
+        if_shift = true;
+        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setupGame();
+        restartGame();
+    }
+
+    public void restartGamelevel3(ActionEvent actionEvent) {
+        HelloApplication.SIZE = 6;
+        gameMatrix.setTranslateY(0);
+        if_shift = true;
+        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setupGame();
+        restartGame();
     }
 }
