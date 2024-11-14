@@ -32,6 +32,7 @@ public class gameController {
     private boolean timeStared = false;
     private boolean isGameOver = false;
     private Timeline countdownTimeline;
+    private int matchedPairs = 0;
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Image> cardValues = new ArrayList<>();
     private Button firstCard = null;
@@ -98,14 +99,17 @@ public class gameController {
     }
 
     private void endGame() {
-        // Handle game-over logic, such as displaying a message
+        countdownTimeline.stop();
+        if (matchedPairs == (HelloApplication.SIZE * HelloApplication.SIZE) / 2) {
+            Timer_Label.setText("Congratulations!");
+            Timer.setText("You Win!");
+        } else {
+            Timer_Label.setText("Time's up!");
+            Timer.setText("Game Over.");
+        }
         timer = 20;
         timeStared = false;
         isGameOver = true;
-        System.out.println("Time's up! Game Over.");
-        Timer_Label.setText("Time's up!");
-        Timer.setText("Game Over.");
-        countdownTimeline.stop();
     }
 
     public void setupGame() {
@@ -233,14 +237,10 @@ public class gameController {
             secondCard = clickedCard;
             // Check whether they are the same
             if (((ImageView) firstCard.getGraphic()).getImage().getUrl().equals(((ImageView) secondCard.getGraphic()).getImage().getUrl())) {
-//                Points+=10;
-//                if (Points == 80){
-//                    pointsLabel.setText("YOU WIN");
-//                    POINT.setText("");
-//                } else if (Points < 80) {
-//                    pointsLabel.setText(String.valueOf(Points));
-//                    System.out.println("MATCHED: Point: " + Points);
-//                }
+              matchedPairs++;
+                if (matchedPairs == (HelloApplication.SIZE * HelloApplication.SIZE) / 2) {
+                    endGame();
+                }
                 firstCard = null;
                 secondCard = null;
             } else {
@@ -305,14 +305,12 @@ public class gameController {
         // Prevent until Animation done
         if (isAnimating_During_restart) return; // Do nothing
         //
-        // Restart Timer
+        matchedPairs = 0;
         timer = 20;
         timeStared = false;
         isGameOver = false;
         countdownTimeline.stop();
         setupTimer();
-
-        // Reset the game grid and shuffle cards
         setupGame();
 
         // Start the animation before restarting the game
@@ -323,15 +321,6 @@ public class gameController {
             }
         }
 
-        // Reset animation state after completion
-//        new Thread(() -> {
-//            try {
-//                Thread.sleep(600); // Wait until animation completes
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            Platform.runLater(() -> isAnimating_During_restart = false);
-//        }).start();
         new Timeline(new KeyFrame(Duration.seconds(0.6), event -> isAnimating_During_restart = false)).play();
     }
 
