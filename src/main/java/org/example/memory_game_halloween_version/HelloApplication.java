@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class HelloApplication extends Application {
 
-    public static int SIZE = 4;
+    public static int SIZE = 2;
     public static int SCENE_WIDTH = 700;
     public static int SCENE_HEIGHT = 745;
 
