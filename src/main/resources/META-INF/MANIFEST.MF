@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: org.example.memory_game_halloween_version.HelloApplication
+Main-Class: org.example.memory_game_halloween_version.Main
 

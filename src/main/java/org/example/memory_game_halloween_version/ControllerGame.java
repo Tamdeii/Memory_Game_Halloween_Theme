@@ -3,7 +3,6 @@ package org.example.memory_game_halloween_version;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,25 +11,27 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import java.awt.event.MouseEvent;
 import java.util.*;
 
-public class gameController {
-    private HelloApplication mainApp;
-    private HomePageController homePageController;
+public class ControllerGame {
+    private Main mainApp;
+    private ControllerHomePage homePageController;
     private static GridDimension dimension;
     private static int b_w;
     private static int b_h;
     private static int i_w;
     private static int i_h;
     private static boolean if_shift = true;
+    private static boolean if_default = true;
 
     private int timer = 20;
     private boolean timeStared = false;
     private boolean isGameOver = false;
+    private int count_fliped;
+    private int count_full;
+    private boolean if_grid_full = false;
     private Timeline countdownTimeline;
     private ArrayList<Button> buttons = new ArrayList<>();
     private ArrayList<Image> cardValues = new ArrayList<>();
@@ -41,6 +42,12 @@ public class gameController {
     @FXML
     private ImageView homeButton;
     @FXML
+    private Button button_level_1;
+    @FXML
+    private Button button_level_2;
+    @FXML
+    private Button button_level_3;
+    @FXML
     private ImageView restartButton;
     @FXML
     private Label Timer_Label, Timer;
@@ -48,7 +55,7 @@ public class gameController {
     private GridPane gameMatrix;
 
     // Method to set the main application reference
-    public void setMainApp(HelloApplication mainApp) { this.mainApp = mainApp; }
+    public void setMainApp(Main mainApp) { this.mainApp = mainApp; }
     //    public void setStage(Stage stage) { this.stage = stage;}
     public void setDimension(int size, int scene_width) {
         this.dimension = new GridDimension(size, scene_width);
@@ -63,6 +70,21 @@ public class gameController {
         setupHomeLogo();
         setupTimer();
     }
+
+    public void setupGame() {
+        setupGameGrid();
+        setupCards();
+        if (if_default){
+            button_level_2.setDisable(true);
+            button_level_2.getStyleClass().remove("button-level");
+            button_level_2.getStyleClass().add("button-disabled");
+        }
+        count_full = Main.SIZE * Main.SIZE;
+        count_fliped = 0;
+        if_grid_full = false;
+        if_default = false;
+    }
+
     private void setupHomeLogo() {
         Image homeImage = new Image(getClass().getResource("/img/Logo_button_home.jpg").toExternalForm());
         homeButton.setImage(homeImage);
@@ -74,19 +96,38 @@ public class gameController {
         homeButton.toFront();
         restartButton.toFront();
     }
+
     private void setupTimer() {
+        switch (Main.SIZE) {
+            case 2:
+                timer = 7; // Level 1: 15 seconds
+                break;
+            case 4:
+                timer = 50; // Level 2: 1 minute (60 seconds)
+                break;
+            case 6:
+                timer = 150; // Level 3: 2 minutes (120 seconds)
+                break;
+            default:
+                timer = 50; // Default to 15 seconds if level is undefined
+        }
         Timer_Label.setText("");
-        Timer.setText("Let's start");
+        Timer.setText("Click 2 cards to start!");
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             timer--;
             updateTimerLabel();
-            if (timer <= 0) {
+            if (count_fliped == count_full){
+                Timer_Label.setText("");
+                Timer.setText("CONGRATULAIONS! YOU WIN!");
+                countdownTimeline.stop();
+            }
+            else if (timer <= 0) {
                 endGame();
                 countdownTimeline.stop();
             }
         }));
         countdownTimeline.setCycleCount(Timeline.INDEFINITE);
-        if (timeStared == true){
+        if (timeStared){
             countdownTimeline.play();
         }
     }
@@ -108,11 +149,6 @@ public class gameController {
         countdownTimeline.stop();
     }
 
-    public void setupGame() {
-        setupGameGrid();
-        setupCards();
-    }
-
     private void startTimer() {
         if (!timeStared) {
             timeStared = true;
@@ -122,7 +158,6 @@ public class gameController {
 
     @FXML
     private void goToHomePage() {
-        System.out.println("HELLLLL");
         if (mainApp != null) {
             mainApp.switchToHomePage();
         } else {
@@ -132,11 +167,11 @@ public class gameController {
 
     private void setupGameGrid() {
         gameMatrix.getChildren().clear();
-        if (HelloApplication.SIZE == 2 && if_shift) {
+        if (Main.SIZE == 2 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 40);
             if_shift = false;
         }
-        else if (HelloApplication.SIZE == 4 && if_shift) {
+        else if (Main.SIZE == 4 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 20);
 //            Label_title.setTranslateY(gameMatrix.getTranslateY() + 5);
             if_shift = false;
@@ -145,8 +180,8 @@ public class gameController {
 
         buttons.clear();
 
-        for (int i = 0; i < HelloApplication.SIZE; i++) {
-            for (int j = 0; j < HelloApplication.SIZE; j++) {
+        for (int i = 0; i < Main.SIZE; i++) {
+            for (int j = 0; j < Main.SIZE; j++) {
                 Button button = new Button();
                 button.setMinSize(b_w, b_h);
                 ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Logo_Back_Group5_card.jpg").toExternalForm()));
@@ -182,16 +217,16 @@ public class gameController {
         }
         Collections.shuffle(images_name_arrl);
 
-        int index_random = 0;
-        for (int count = 0; count < ((HelloApplication.SIZE * HelloApplication.SIZE) / 2) ; count++)
+        Random random = new Random();
+        int index_random = random.nextInt(images_name_str.length);
+        for (int count = 0; count < ((Main.SIZE * Main.SIZE) / 2) ; count++)
         {
             Image image = new Image(getClass().getResource(images_name_arrl.get(index_random)).toExternalForm());
             cardValues.add(image);
             cardValues.add(image);
             if (index_random >= (images_name_str.length - 1)){
-                Random random = new Random();
-                index_random = random.nextInt(images_name_str.length);
-                Collections.shuffle(images_name_arrl);
+                index_random = 0;
+//                Collections.shuffle(images_name_arrl);
             }
             else {
                 index_random++;
@@ -233,16 +268,9 @@ public class gameController {
             secondCard = clickedCard;
             // Check whether they are the same
             if (((ImageView) firstCard.getGraphic()).getImage().getUrl().equals(((ImageView) secondCard.getGraphic()).getImage().getUrl())) {
-//                Points+=10;
-//                if (Points == 80){
-//                    pointsLabel.setText("YOU WIN");
-//                    POINT.setText("");
-//                } else if (Points < 80) {
-//                    pointsLabel.setText(String.valueOf(Points));
-//                    System.out.println("MATCHED: Point: " + Points);
-//                }
                 firstCard = null;
                 secondCard = null;
+                count_fliped += 2;
             } else {
                 pauseAndResetCards();
             }
@@ -357,29 +385,55 @@ public class gameController {
     }
 
     public void restartGamelevel1(ActionEvent actionEvent) {
-        HelloApplication.SIZE = 2;
+        Main.SIZE = 2;
         gameMatrix.setTranslateY(0);
         if_shift = true;
-        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setDimension(Main.SIZE, Main.SCENE_WIDTH);
         setupGame();
         restartGame();
+        resetButtonLevel();
+        button_level_1.setDisable(true);
+        button_level_1.getStyleClass().remove("button-level");
+        button_level_1.getStyleClass().add("button-disabled");
     }
 
     public void restartGamelevel2(ActionEvent actionEvent) {
-        HelloApplication.SIZE = 4;
+        Main.SIZE = 4;
         gameMatrix.setTranslateY(0);
         if_shift = true;
-        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setDimension(Main.SIZE, Main.SCENE_WIDTH);
         setupGame();
         restartGame();
+        resetButtonLevel();
+        button_level_2.setDisable(true);
+        button_level_2.getStyleClass().remove("button-level");
+        button_level_2.getStyleClass().add("button-disabled");
     }
 
     public void restartGamelevel3(ActionEvent actionEvent) {
-        HelloApplication.SIZE = 6;
+        Main.SIZE = 6;
         gameMatrix.setTranslateY(0);
         if_shift = true;
-        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setDimension(Main.SIZE, Main.SCENE_WIDTH);
         setupGame();
         restartGame();
+        resetButtonLevel();
+        button_level_3.setDisable(true);
+        button_level_3.getStyleClass().remove("button-level");
+        button_level_3.getStyleClass().add("button-disabled");
+    }
+
+    private void resetButtonLevel(){
+        button_level_1.getStyleClass().remove("button-disabled");
+        button_level_2.getStyleClass().remove("button-disabled");
+        button_level_3.getStyleClass().remove("button-disabled");
+
+        button_level_1.getStyleClass().add("button-level");
+        button_level_2.getStyleClass().add("button-level");
+        button_level_3.getStyleClass().add("button-level");
+
+        button_level_1.setDisable(false);
+        button_level_2.setDisable(false);
+        button_level_3.setDisable(false);
     }
 }

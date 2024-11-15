@@ -6,9 +6,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class HomePageController {
+public class ControllerHomePage {
     private boolean isSoundEnabled = true;
-    private HelloApplication mainApp;
+    private Main mainApp;
 
     @FXML
     private ImageView logoImageView;
@@ -17,7 +17,7 @@ public class HomePageController {
     @FXML
     private ToggleButton soundToggleButton;
 
-    public void setMainApp(HelloApplication mainApp) {
+    public void setMainApp(Main mainApp) {
         this.mainApp = mainApp;
     }
 
@@ -30,13 +30,21 @@ public class HomePageController {
 
     private void setUpsoundToggleButton() {
         soundToggleButton.setOnAction(actionEvent -> {
-            System.out.println("Updating button text");
             mainApp.toggleSound();
             isSoundEnabled = !isSoundEnabled;
             if (isSoundEnabled){
+                soundToggleButton.getStyleClass().remove("button-sound-off");
+                soundToggleButton.getStyleClass().add("button-sound");
                 soundToggleButton.setText("Sound: On");
+
             }else {
                 soundToggleButton.setText("Sound: Off");
+                soundToggleButton.getStyleClass().remove("button-sound");
+                soundToggleButton.getStyleClass().add("button-sound-off");
+//                soundToggleButton.getStyleClass().add("button-sound");  // Ensure this is added without overriding necessary styles
+//                soundToggleButton.setStyle("-fx-background-color: #FF0000;"
+//                        + "-fx-text-fill: #ffffff;");
+//                soundToggleButton.setStyle("-fx-text-fill: #ffffff;");
             }
         });
     }

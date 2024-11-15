@@ -12,7 +12,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.IOException;
 import java.net.URL;
 
-public class HelloApplication extends Application {
+public class Main extends Application {
 
     public static int SIZE = 4;
     public static int SCENE_WIDTH = 700;
@@ -23,8 +23,8 @@ public class HelloApplication extends Application {
     private Scene sceneHomePage;
     private Stage primaryStage; // Store reference to primary stage
     private boolean isSoundEnabled = true;
-    private gameController gameControllerInstance;
-    private  HomePageController homePageController;
+    private ControllerGame gameControllerInstance;
+    private ControllerHomePage homePageController;
 
     @Override
     public void start(Stage stage) {
@@ -33,25 +33,24 @@ public class HelloApplication extends Application {
             this.primaryStage = stage; // Initialize primary stage reference
 
             // Load the game scene
-            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("game-view.fxml"));
             Parent gameRoot = gameLoader.load();
             sceneRootGame = new Scene(gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
-            sceneRootGame.getStylesheets().add(getClass().getResource("mystyle.css").toExternalForm());
+            sceneRootGame.getStylesheets().add(getClass().getResource("game-view.css").toExternalForm());
 
             // Load the home page scene
-            FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("home-page.fxml"));
+            FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("home-page-view.fxml"));
             Parent homeRoot = homeLoader.load();
             sceneHomePage = new Scene(homeRoot, SCENE_WIDTH, SCENE_HEIGHT);
-            sceneHomePage.getStylesheets().add(getClass().getResource("homePageCSS.css").toExternalForm());
+            sceneHomePage.getStylesheets().add(getClass().getResource("home-page-view.css").toExternalForm());
 
             // Retrieve controllers and set main application reference
-            gameController gameController = gameLoader.getController();
+            ControllerGame gameController = gameLoader.getController();
             gameController.setMainApp(this); // Ensure method name matches
-//            gameController.setStage(primaryStage);
-            gameController.setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+            gameController.setDimension(Main.SIZE, Main.SCENE_WIDTH);
             gameController.setupGame();
 
-            HomePageController homeController = homeLoader.getController();
+            ControllerHomePage homeController = homeLoader.getController();
             homeController.setMainApp(this); // Ensure method name matches
 
             // Set up background music

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.memory_game_halloween_version.HomePageController"
+      fx:controller="org.example.memory_game_halloween_version.ControllerHomePage"
       style="-fx-background-color: #2d2d2d;">
 
     <!-- Padding -->

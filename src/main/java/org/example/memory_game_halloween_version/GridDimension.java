@@ -30,19 +30,5 @@ public class GridDimension {
         image_height = button_height;
         image_width = button_height;
     }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    // Method to get the window width from the Stage
-    public double getWindowWidth() {
-        if (stage != null) {
-            return stage.getWidth();
-        } else {
-            System.err.println("Stage reference not set!");
-            return 0;
-        }
-    }
 }
 
