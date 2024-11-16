@@ -37,7 +37,7 @@
 
 /* Định dạng cho nút âm thanh */
 .button-sound {
-    -fx-background-color: #5bdc05; /* Màu nền cam */
+    -fx-background-color: #556B2F; /* Màu nền xanh la */
     -fx-text-fill: white; /* Màu chữ trắng */
     -fx-font-size: 20px; /* Kích thước chữ */
     -fx-font-family: "Creepster", cursive; /* Font chữ ma mị */
@@ -50,7 +50,21 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ nhẹ */
 }
 
-.button-sound:hover {
+.button-sound-off {
+    -fx-background-color: #B22222; /* Màu nền cam */
+    -fx-text-fill: white; /* Màu chữ trắng */
+    -fx-font-size: 20px; /* Kích thước chữ */
+    -fx-font-family: "Creepster", cursive; /* Font chữ ma mị */
+    -fx-font-weight: bold; /* In đậm chữ */
+    -fx-padding: 12px 25px; /* Padding cho nút */
+    -fx-border-radius: 8px; /* Bo góc */
+    -fx-background-radius: 8px; /* Bo góc nền */
+    -fx-border-color: #efbf3e; /* Màu viền vàng */
+    -fx-border-width: 2px; /* Độ dày viền */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); /* Bóng đổ nhẹ */
+}
+
+.button-sound:hover, .button-sound-off:hover {
     -fx-background-color: #efbf3e; /* Màu nền vàng khi hover */
     -fx-text-fill: #2d2d2d; /* Màu chữ tối khi hover */
 }

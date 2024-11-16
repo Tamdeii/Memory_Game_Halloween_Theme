@@ -28,15 +28,35 @@ public class HomePageController {
         setUpsoundToggleButton();
     }
 
+//    private void setUpsoundToggleButton() {
+//        soundToggleButton.setOnAction(actionEvent -> {
+//            System.out.println("Updating button text");
+//            mainApp.toggleSound();
+//            isSoundEnabled = !isSoundEnabled;
+//            if (isSoundEnabled){
+//                soundToggleButton.setText("Sound: On");
+//            }else {
+//                soundToggleButton.setText("Sound: Off");
+//            }
+//        });
+//    }
     private void setUpsoundToggleButton() {
         soundToggleButton.setOnAction(actionEvent -> {
-            System.out.println("Updating button text");
             mainApp.toggleSound();
             isSoundEnabled = !isSoundEnabled;
             if (isSoundEnabled){
+                soundToggleButton.getStyleClass().remove("button-sound-off");
+                soundToggleButton.getStyleClass().add("button-sound");
                 soundToggleButton.setText("Sound: On");
+
             }else {
                 soundToggleButton.setText("Sound: Off");
+                soundToggleButton.getStyleClass().remove("button-sound");
+                soundToggleButton.getStyleClass().add("button-sound-off");
+//                soundToggleButton.getStyleClass().add("button-sound");  // Ensure this is added without overriding necessary styles
+//                soundToggleButton.setStyle("-fx-background-color: #FF0000;"
+//                        + "-fx-text-fill: #ffffff;");
+//                soundToggleButton.setStyle("-fx-text-fill: #ffffff;");
             }
         });
     }
