@@ -3,7 +3,6 @@ package org.example.memory_game_halloween_version;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,14 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import java.awt.event.MouseEvent;
 import java.util.*;
 
-public class gameController {
-    private HelloApplication mainApp;
+public class GameController {
+    private Application mainApp;
     private HomePageController homePageController;
     private static GridDimension dimension;
     private static int b_w;
@@ -49,7 +46,7 @@ public class gameController {
     private GridPane gameMatrix;
 
     // Method to set the main application reference
-    public void setMainApp(HelloApplication mainApp) { this.mainApp = mainApp; }
+    public void setMainApp(Application mainApp) { this.mainApp = mainApp; }
     //    public void setStage(Stage stage) { this.stage = stage;}
     public void setDimension(int size, int scene_width) {
         this.dimension = new GridDimension(size, scene_width);
@@ -100,7 +97,7 @@ public class gameController {
 
     private void endGame() {
         countdownTimeline.stop();
-        if (matchedPairs == (HelloApplication.SIZE * HelloApplication.SIZE) / 2) {
+        if (matchedPairs == (Application.SIZE * Application.SIZE) / 2) {
             Timer_Label.setText("Congratulations!");
             Timer.setText("You Win!");
         } else {
@@ -113,11 +110,11 @@ public class gameController {
     }
 
     public void resetTimer(){
-        if (HelloApplication.SIZE == 2){
+        if (Application.SIZE == 2){
             timer = 10;
-        } else if (HelloApplication.SIZE == 4) {
+        } else if (Application.SIZE == 4) {
             timer = 80;
-        } else if (HelloApplication.SIZE == 6) {
+        } else if (Application.SIZE == 6) {
             timer = 160;
         } else {
             timer = 40;
@@ -148,11 +145,11 @@ public class gameController {
 
     private void setupGameGrid() {
         gameMatrix.getChildren().clear();
-        if (HelloApplication.SIZE == 2 && if_shift) {
+        if (Application.SIZE == 2 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 40);
             if_shift = false;
         }
-        else if (HelloApplication.SIZE == 4 && if_shift) {
+        else if (Application.SIZE == 4 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 20);
 //            Label_title.setTranslateY(gameMatrix.getTranslateY() + 5);
             if_shift = false;
@@ -161,8 +158,8 @@ public class gameController {
 
         buttons.clear();
 
-        for (int i = 0; i < HelloApplication.SIZE; i++) {
-            for (int j = 0; j < HelloApplication.SIZE; j++) {
+        for (int i = 0; i < Application.SIZE; i++) {
+            for (int j = 0; j < Application.SIZE; j++) {
                 Button button = new Button();
                 button.setMinSize(b_w, b_h);
                 ImageView backImageView = new ImageView(new Image(getClass().getResource("/img/Logo_Back_Group5_card.jpg").toExternalForm()));
@@ -199,7 +196,7 @@ public class gameController {
         Collections.shuffle(images_name_arrl);
 
         int index_random = 0;
-        for (int count = 0; count < ((HelloApplication.SIZE * HelloApplication.SIZE) / 2) ; count++)
+        for (int count = 0; count < ((Application.SIZE * Application.SIZE) / 2) ; count++)
         {
             Image image = new Image(getClass().getResource(images_name_arrl.get(index_random)).toExternalForm());
             cardValues.add(image);
@@ -250,7 +247,7 @@ public class gameController {
             // Check whether they are the same
             if (((ImageView) firstCard.getGraphic()).getImage().getUrl().equals(((ImageView) secondCard.getGraphic()).getImage().getUrl())) {
               matchedPairs++;
-                if (matchedPairs == (HelloApplication.SIZE * HelloApplication.SIZE) / 2) {
+                if (matchedPairs == (Application.SIZE * Application.SIZE) / 2) {
                     endGame();
                 }
                 firstCard = null;
@@ -358,28 +355,28 @@ public class gameController {
     }
 
     public void restartGamelevel1(ActionEvent actionEvent) {
-        HelloApplication.SIZE = 2;
+        Application.SIZE = 2;
         gameMatrix.setTranslateY(0);
         if_shift = true;
-        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setDimension(Application.SIZE, Application.SCENE_WIDTH);
         setupGame();
         restartGame();
     }
 
     public void restartGamelevel2(ActionEvent actionEvent) {
-        HelloApplication.SIZE = 4;
+        Application.SIZE = 4;
         gameMatrix.setTranslateY(0);
         if_shift = true;
-        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setDimension(Application.SIZE, Application.SCENE_WIDTH);
         setupGame();
         restartGame();
     }
 
     public void restartGamelevel3(ActionEvent actionEvent) {
-        HelloApplication.SIZE = 6;
+        Application.SIZE = 6;
         gameMatrix.setTranslateY(0);
         if_shift = true;
-        setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+        setDimension(Application.SIZE, Application.SCENE_WIDTH);
         setupGame();
         restartGame();
     }
