@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class HomePageController {
     private boolean isSoundEnabled = true;
-    private HelloApplication mainApp;
+    private Application mainApp;
 
     @FXML
     private ImageView logoImageView;
@@ -17,7 +17,7 @@ public class HomePageController {
     @FXML
     private ToggleButton soundToggleButton;
 
-    public void setMainApp(HelloApplication mainApp) {
+    public void setMainApp(Application mainApp) {
         this.mainApp = mainApp;
     }
 

@@ -66,7 +66,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.example.memory_game_halloween_version/org.example.memory_game_halloween_version.HelloApplication
+                                org.example.memory_game_halloween_version/org.example.memory_game_halloween_version.Application
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

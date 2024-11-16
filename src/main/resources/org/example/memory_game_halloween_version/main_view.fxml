@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.memory_game_halloween_version.gameController"
+            fx:controller="org.example.memory_game_halloween_version.GameController"
             style="-fx-background-color: #2d2d2d;">
     <!-- Game Title-->
     <HBox alignment="CENTER" spacing="30" AnchorPane.topAnchor="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">

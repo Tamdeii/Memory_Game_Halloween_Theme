@@ -1,6 +1,5 @@
 package org.example.memory_game_halloween_version;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +11,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.IOException;
 import java.net.URL;
 
-public class HelloApplication extends Application {
+public class Application extends javafx.application.Application {
 
     public static int SIZE = 2;
     public static int SCENE_WIDTH = 700;
@@ -23,7 +22,7 @@ public class HelloApplication extends Application {
     private Scene sceneHomePage;
     private Stage primaryStage; // Store reference to primary stage
     private boolean isSoundEnabled = true;
-    private gameController gameControllerInstance;
+    private GameController gameControllerInstance;
     private  HomePageController homePageController;
 
     @Override
@@ -33,22 +32,22 @@ public class HelloApplication extends Application {
             this.primaryStage = stage; // Initialize primary stage reference
 
             // Load the game scene
-            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("main_view.fxml"));
             Parent gameRoot = gameLoader.load();
             sceneRootGame = new Scene(gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
-            sceneRootGame.getStylesheets().add(getClass().getResource("mystyle.css").toExternalForm());
+            sceneRootGame.getStylesheets().add(getClass().getResource("main.css").toExternalForm());
 
             // Load the home page scene
-            FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("home-page.fxml"));
+            FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("home_view.fxml"));
             Parent homeRoot = homeLoader.load();
             sceneHomePage = new Scene(homeRoot, SCENE_WIDTH, SCENE_HEIGHT);
-            sceneHomePage.getStylesheets().add(getClass().getResource("homePageCSS.css").toExternalForm());
+            sceneHomePage.getStylesheets().add(getClass().getResource("homePage.css").toExternalForm());
 
             // Retrieve controllers and set main application reference
-            gameController gameController = gameLoader.getController();
+            GameController gameController = gameLoader.getController();
             gameController.setMainApp(this); // Ensure method name matches
 //            gameController.setStage(primaryStage);
-            gameController.setDimension(HelloApplication.SIZE, HelloApplication.SCENE_WIDTH);
+            gameController.setDimension(Application.SIZE, Application.SCENE_WIDTH);
             gameController.setupGame();
 
             HomePageController homeController = homeLoader.getController();
