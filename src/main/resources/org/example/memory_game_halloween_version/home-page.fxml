@@ -18,8 +18,7 @@
 
     <!-- Title Label -->
     <Label text=" Memory of Fright "
-           styleClass="label-custom"
-    />
+           styleClass="label-custom"/>
 
     <!-- Logo Image -->
     <ImageView fx:id="logoImageView" fitWidth="500" fitHeight="300" pickOnBounds="true" preserveRatio="true" />
