@@ -45,9 +45,7 @@ public class GameController {
     @FXML
     private GridPane gameMatrix;
 
-    // Method to set the main application reference
     public void setMainApp(Application mainApp) { this.mainApp = mainApp; }
-    //    public void setStage(Stage stage) { this.stage = stage;}
     public void setDimension(int size, int scene_width) {
         this.dimension = new GridDimension(size, scene_width);
         b_w = dimension.button_width;
@@ -151,7 +149,6 @@ public class GameController {
         }
         else if (Application.SIZE == 4 && if_shift) {
             gameMatrix.setTranslateY(gameMatrix.getLayoutY() + 20);
-//            Label_title.setTranslateY(gameMatrix.getTranslateY() + 5);
             if_shift = false;
         }
         else{}
@@ -171,12 +168,6 @@ public class GameController {
                 buttons.add(button);
             }
         }
-    }
-
-    private Map<String, Image> imageCache = new HashMap<>();
-
-    private Image loadImage(String path) {
-        return imageCache.computeIfAbsent(path, p -> new Image(getClass().getResource(p).toExternalForm()));
     }
 
     private void setupCards() {
