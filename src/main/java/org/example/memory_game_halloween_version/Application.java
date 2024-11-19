@@ -20,7 +20,7 @@ public class Application extends javafx.application.Application {
     private MediaPlayer mediaPlayer;
     private Scene sceneRootGame;
     private Scene sceneHomePage;
-    private Stage primaryStage; // Store reference to primary stage
+    private Stage primaryStage; // Store reference to primary stage.
     private boolean isSoundEnabled = true;
     private GameController gameControllerInstance;
     private  HomePageController homePageController;
@@ -46,7 +46,6 @@ public class Application extends javafx.application.Application {
             // Retrieve controllers and set main application reference
             GameController gameController = gameLoader.getController();
             gameController.setMainApp(this); // Ensure method name matches
-//            gameController.setStage(primaryStage);
             gameController.setDimension(Application.SIZE, Application.SCENE_WIDTH);
             gameController.setupGame();
 

@@ -201,7 +201,6 @@ public class GameController {
                 index_random++;
             }
         }
-
         Collections.shuffle(cardValues);
     }
 
