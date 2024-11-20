@@ -23,8 +23,8 @@ public class Main extends Application {
     private Scene sceneHomePage;
     private Stage primaryStage; // Store reference to primary stage
     private boolean isSoundEnabled = true;
-    private ControllerGame gameControllerInstance;
-    private ControllerHomePage homePageController;
+//    private ControllerGame gameControllerInstance;
+//    private ControllerHomePage homePageController;
 
     @Override
     public void start(Stage stage) {
@@ -66,7 +66,7 @@ public class Main extends Application {
             Image icon = new Image(getClass().getResourceAsStream("/img/Logo_game.jpg"));
             stage.getIcons().add(icon);
             stage.setTitle("Memory Game Halloween Version");
-            stage.setResizable(true);
+            stage.setResizable(false);
 
             // Start the application with the home page scene
             stage.setScene(sceneHomePage);

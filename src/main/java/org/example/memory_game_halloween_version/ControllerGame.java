@@ -204,10 +204,23 @@ public class ControllerGame {
     private void setupCards() {
         cardValues.clear();
 
-        String[] images_name_str = {"/img/1_skeleton.jpg", "/img/2_grimreaper.jpg", "/img/3_werewolf.jpg",
-                "/img/4_mummy.jpg", "/img/5_frankenstein.jpg", "/img/6_dracula.jpg",
-                "/img/7_ghoul.jpg", "/img/8_pumpkin.jpg", "/img/9_pirate.jpg",
-                "/img/10_batman.jpg", "/img/11_catpumpkin.jpg", "/img/12_courage.jpg"};
+        String[] images_name_str = {"/img/pic_1.jpg", "/img/pic_2.jpg", "/img/pic_3.jpg",
+                "/img/pic_4.jpg", "/img/pic_5.jpg", "/img/pic_6.jpg",
+                "/img/pic_7.jpg", "/img/pic_8.jpg", "/img/pic_9.jpg",
+                "/img/pic_10.jpg", "/img/pic_11.jpg", "/img/pic_12.jpg"};
+
+        // pic_1: https://www.freepik.com/free-vector/hand-drawn-skeleton-cartoon-illustration_47684854.htm#fromView=search&page=1&position=9&uuid=273a143e-eb7f-4c4a-9cf9-12bd593730ad
+        // pic_2: https://www.freepik.com/free-vector/cute-grim-reaper-dabbing-cartoon-icon-illustration_13149217.htm#fromView=search&page=1&position=2&uuid=a9fb90d5-b076-4c43-bdba-12275dab18e0        // pic_2: https://www.freepik.com/free-ai-image/3d-cartoon-dj-illustration_262764373.htm#fromView=search&page=1&position=0&uuid=2f65d824-4714-45fb-be34-942ca9466737
+        // pic_3: https://www.freepik.com/free-vector/hand-drawn-werewolf-illustration_31639439.htm#fromView=image_search_similar&page=1&position=6&uuid=9be89899-49d2-4268-a466-c252e83e790a
+        // pic_4: https://www.freepik.com/free-vector/cute-mummy-bring-candy-with-pumpkin-basket-cartoon-vector-icon-illustration-holiday-food-isolated_256104760.htm#fromView=search&page=1&position=2&uuid=9ec03259-0667-4336-b469-6899d036341e
+        // pic_5: https://www.freepik.com/free-vector/cute-zombie-rise-from-grave_13716101.htm#fromView=image_search_similar&page=1&position=9&uuid=77c7e8f4-2a83-41de-af8f-46371bd2053e
+        // pic_6: https://www.freepik.com/free-vector/colorful-vampire-character-collection-with-flat-design_2926554.htm#fromView=search&page=2&position=46&uuid=0ec17abd-72cb-40f4-a05c-88fe46e3aca5
+        // pic_7: https://www.freepik.com/free-vector/scary-set-halloween-ghosts_2993406.htm#fromView=search&page=2&position=6&uuid=16961fde-a1a5-4ac0-b9ed-bd446e4b3804
+        // pic_8: https://www.freepik.com/free-vector/hand-drawn-halloween-pumpkin-illustration_17807588.htm#fromView=search&page=1&position=10&uuid=383ad854-fd51-4e9b-9933-9b27e401b963
+        // pic_9: https://www.freepik.com/free-vector/cute-astronaut-pirate-captain-with-sword-cartoon-vector-icon-illustration-science-holiday-isolated_57610296.htm#fromView=search&page=1&position=36&uuid=67269361-e559-495a-8c90-f408442f86ea
+        // pic_10: https://ac-illust.com/clip-art/25172990?downloader_register=success
+        // pic_11: https://yayimages.com/48494164/cute-halloween-black-cat-with-evil-pumpkin-illustration-cartoon-black-cat-and-evil-pumpkin-halloween.html
+        // pic_12: https://pixabay.com/vi/vectors/vi%E1%BB%87t-nam-l%C3%A1-c%E1%BB%9D-ti%E1%BA%BFng-vi%E1%BB%87t-qu%E1%BB%91c-gia-26834/
 
         ArrayList<String> images_name_arrl = new ArrayList<>();
         images_name_arrl.clear();
