@@ -5,6 +5,8 @@ A spooky twist on the classic memory card-matching game, designed to boost cogni
 ## 👻 Game Description
 
 This memory game challenges players to uncover hidden Halloween-themed images on a grid of cards. Match all pairs to win! It’s both entertaining and educational — perfect for kids and adults alike.
+![image](https://github.com/user-attachments/assets/634502b3-07a7-4f87-96f6-cfbb96c0b48c)
+![image](https://github.com/user-attachments/assets/11e7d992-8e33-4063-83c8-d68df92ba4a3)
 
 ## ✨ Features
 
